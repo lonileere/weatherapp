@@ -1,24 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
+import { Button } from "./ui/Button";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-5xl">
-          Edit <code>src/App.tsx</code> and save to reload or not?.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1>Weather App</h1>
       </header>
+      <Button>Search</Button>
     </div>
   );
 }
