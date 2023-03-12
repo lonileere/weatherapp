@@ -6,8 +6,18 @@ export const useGetLocations = (query: string) => {
     fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
     )
-      .then((res) => res.json())
-      .then(setLocations);
+      .then((res) => {
+        if (res.status === 400) {
+          throw new Error("Invalid Search Term");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setLocations(data);
+      })
+      .catch((err) => {
+        setLocations([]);
+      });
   }, [query]);
 
   return locations;
