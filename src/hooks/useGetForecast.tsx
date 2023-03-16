@@ -1,0 +1,29 @@
+import { useEffect, useState } from "react";
+
+interface ForecastProps {
+  city?: { name: string; country: string; county: string };
+  list?: { weather: { main: string }; main: { temp: number } }[];
+}
+
+export const useGetForecast = (lat: number, lon: number) => {
+  const [data, setData] = useState<ForecastProps | undefined>(undefined);
+  useEffect(() => {
+    fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+    )
+      .then((res) => {
+        if (res.status === 400) {
+          throw new Error("Invalid Co-ordinates");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+      })
+      .catch((err) => {
+        setData(undefined);
+      });
+  }, [lat, lon]);
+
+  return data;
+};
