@@ -1,10 +1,12 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React from "react";
 
 interface Props {
   children?: React.ReactNode;
   onClick: () => void;
-  primary: true;
-  tailwind: string;
+  primary?: true;
+  tailwind?: string;
+  isDisabled?: boolean;
 }
 
 export const Button: React.FC<Props> = ({
@@ -12,9 +14,11 @@ export const Button: React.FC<Props> = ({
   onClick,
   primary,
   tailwind,
+  isDisabled,
 }) => {
   return (
     <button
+      disabled={isDisabled}
       onClick={onClick}
       className={` py-2 px-4 rounded-lg transition-colors duration-100 ${
         primary

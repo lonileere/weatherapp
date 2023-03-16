@@ -3,19 +3,18 @@ import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
-  temperature: number;
-  small?: boolean;
+  weather: string | undefined;
+  temp: number | undefined;
 }
 
-export const WeatherCard: React.FC<Props> = ({ temperature, small }) => {
+export const WeatherCard: React.FC<Props> = ({ weather, temp }) => {
   return (
     <section className="flex">
-      <span className={small ? "text-4xl" : "text-8xl"}>
+      <span className={"text-8xl"}>
+        {weather}
         <FontAwesomeIcon icon={faCloud} />
       </span>
-      <span className={small ? "text-4xl ml-2" : "text-5xl ml-5"}>
-        {temperature}°C
-      </span>
+      <span className={"text-5xl ml-5"}>{temp}°C</span>
     </section>
   );
 };
