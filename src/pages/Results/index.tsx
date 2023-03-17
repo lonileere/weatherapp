@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { WeatherCard } from "../../ui/WeatherCard";
 import { useGetForecast } from "../../hooks/useGetForecast";
 import { Button } from "../../ui/Button";
-import { time } from "console";
+import { useLocation } from "react-router-dom";
 
 interface Props {}
 
 interface ForecastList {
-  weather?: { main: string };
-  main?: { temp: number };
+  weather: Array<{ main: string }>;
+  main: { temp: number };
+  dt_txt: string;
 }
 
 export const Results: React.FC<Props> = () => {
-  const forecastData = useGetForecast(44.34, 10.99);
+  const { state } = useLocation();
+  const forecastData = useGetForecast(state.lat, state.lon);
   const isLoading = forecastData === undefined;
   const [timePeriod, setTimePeriod] = useState(0);
 
@@ -20,34 +22,48 @@ export const Results: React.FC<Props> = () => {
 
   const { city, list } = forecastData;
 
-  let forecastList = list as Array<ForecastList>;
+  const buildCountryString = (
+    name: string,
+    county: string,
+    country: string
+  ) => {
+    return `${name !== undefined ? name : ""}${
+      county !== undefined ? ", " + county : ""
+    }${country !== undefined ? ", " + country : ""}`;
+  };
 
-  console.log(forecastList);
+  let forecastList = list as Array<ForecastList>;
 
   return (
     <>
-      <h1 className="text-6xl mb-4 md:text-7xl">
-        {city?.name}, {city?.county} {city?.country},
+      <h1 className="text-5xl mb-4 md:text-7xl">
+        {buildCountryString(city.name, city.county, city.country)}
       </h1>
       <WeatherCard
-        weather={forecastList[timePeriod]?.weather?.main}
-        temp={forecastList[timePeriod]?.main?.temp}
+        weather={forecastList[timePeriod].weather[0].main}
+        temp={forecastList[timePeriod].main.temp}
+        date={forecastList[timePeriod].dt_txt}
       />
-      <Button
-        isDisabled={timePeriod === 0}
-        onClick={() => setTimePeriod(timePeriod - 1)}
-      >
-        {" "}
-        {"<"}{" "}
-      </Button>
-      <Button
-        isDisabled={timePeriod === 40}
-        onClick={() => setTimePeriod(timePeriod + 1)}
-      >
-        {" "}
-        {">"}{" "}
-      </Button>
-      <Button onClick={() => setTimePeriod(0)}> Reset </Button>
+      <div className="flex flex-row w-full space-x-3">
+        <Button
+          isDisabled={timePeriod === 0}
+          onClick={() => setTimePeriod(timePeriod - 1)}
+          tailwind="w-full"
+        >
+          {"<"}
+        </Button>
+        <Button onClick={() => setTimePeriod(0)} tailwind="w-full">
+          {" "}
+          Reset{" "}
+        </Button>
+        <Button
+          isDisabled={timePeriod === 39}
+          onClick={() => setTimePeriod(timePeriod + 1)}
+          tailwind="w-full"
+        >
+          {">"}
+        </Button>
+      </div>
     </>
   );
 };

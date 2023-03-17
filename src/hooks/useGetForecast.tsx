@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
 interface ForecastProps {
-  city?: { name: string; country: string; county: string };
-  list?: { weather: { main: string }; main: { temp: number } }[];
+  city: { name: string; country: string; county: string };
+  list: {
+    weather: { main: string }[];
+    main: { temp: number };
+    dt_txt: string;
+  }[];
 }
 
 export const useGetForecast = (lat: number, lon: number) => {
