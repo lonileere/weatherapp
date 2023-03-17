@@ -1,10 +1,10 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../../ui/Button";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { useGetLocations } from "../../hooks/useGetLocations";
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 
 interface Props {}
 
@@ -58,7 +58,11 @@ export const Search: React.FC<Props> = () => {
       ></Select>
       <Button
         tailwind="w-48 self-center"
-        onClick={() => navigate("/results")}
+        onClick={() =>
+          selectedLocation !== null &&
+          navigate("/results", { state: selectedLocation })
+        }
+        isDisabled={selectedLocation === null}
         primary={true}
       >
         <span className="text-xl font-bold">
