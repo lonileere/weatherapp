@@ -7,7 +7,7 @@ import { Search } from "./pages/Search";
 function App() {
   return (
     <>
-      <div className="mx-5 flex-1 md:mx-auto flex flex-col max-w-3xl self-center">
+      <div className="mx-5 p-8 flex-1 md:mx-auto flex flex-col max-w-3xl self-center">
         <Routes>
           <Route path="/" element={<Search />} />
           <Route path="/results" element={<Results />} />
