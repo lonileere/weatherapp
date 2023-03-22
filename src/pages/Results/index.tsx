@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { WeatherCard } from "../../ui/WeatherCard";
 import { useGetForecast } from "../../hooks/useGetForecast";
 import { Button } from "../../ui/Button";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {}
 
@@ -36,9 +38,15 @@ export const Results: React.FC<Props> = () => {
 
   return (
     <>
-      <h1 className="text-5xl mb-4 md:text-7xl">
-        {buildCountryString(city.name, city.county, city.country)}
-      </h1>
+      <div className="flex flex-row gap-x-2 justify-between align-baseline">
+        <h1 className="text-xl mb-4 md:text-7xl">
+          {buildCountryString(city.name, city.county, city.country)}
+        </h1>
+        <Link to="/">
+          <FontAwesomeIcon className="text-2xl" icon={faArrowCircleLeft} />
+        </Link>
+      </div>
+
       <WeatherCard
         weather={forecastList[timePeriod].weather[0].main}
         temp={forecastList[timePeriod].main.temp}
@@ -50,18 +58,22 @@ export const Results: React.FC<Props> = () => {
           onClick={() => setTimePeriod(timePeriod - 1)}
           tailwind="w-full"
         >
-          {"<"}
+          {"-3hrs"}
         </Button>
-        <Button onClick={() => setTimePeriod(0)} tailwind="w-full">
+        <Button
+          isDisabled={timePeriod === 0}
+          onClick={() => setTimePeriod(0)}
+          tailwind="w-full"
+        >
           {" "}
-          Reset{" "}
+          Current{" "}
         </Button>
         <Button
           isDisabled={timePeriod === 39}
           onClick={() => setTimePeriod(timePeriod + 1)}
           tailwind="w-full"
         >
-          {">"}
+          {"+3hrs"}
         </Button>
       </div>
     </>
