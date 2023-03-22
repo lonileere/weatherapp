@@ -43,18 +43,20 @@ const weatherIcon = (weather: string) => {
 
 export const WeatherCard: React.FC<Props> = ({ weather, temp, date }) => {
   return (
-    <section className="grid grid-rows-2 grid-cols-1 md:grid-cols-2 mb-5">
-      <span
-        className={
-          "flex justify-center text-9xl md:col-end-2 md:row-span-2 text-center"
-        }
-      >
-        {weatherIcon(weather)}
-      </span>
-      <span className={"text-5xl md:text-7xl ml-5 md:col-start-2"}>
+    <section className="grid grid-rows-3 items-center grid-cols-1 md:grid-cols-2 md:grid-rows-2 mb-5">
+      <span className={"text-7xl md:text-7xl md:col-start-2 text-center"}>
         {temp}°C
       </span>
-      <span className={"text-3xl md:text-5xl ml-5 md:col-start-2"}>{date}</span>
+      <div className="flex flex-col md:row-span-2 md:row-end-1 items-center">
+        <span className={"flex justify-center text-9xl  text-center"}>
+          {weatherIcon(weather)}
+        </span>
+        <span className="text-xl">{weather}</span>
+      </div>
+
+      <span className={"text-3xl md:text-5xl md:col-start-2 text-center"}>
+        {date}
+      </span>
     </section>
   );
 };
