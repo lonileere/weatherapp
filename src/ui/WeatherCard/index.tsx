@@ -43,7 +43,7 @@ const weatherIcon = (weather: string) => {
 
 export const WeatherCard: React.FC<Props> = ({ weather, temp, date }) => {
   return (
-    <section className="grid grid-rows-3 items-center grid-cols-1 md:grid-cols-2 md:grid-rows-2 mb-5">
+    <section className="grid grid-rows-3 items-center grid-cols-1 md:grid-cols-2 md:grid-rows-2 md:space-y-8">
       <span className={"text-7xl md:text-7xl md:col-start-2 text-center"}>
         {temp}°C
       </span>

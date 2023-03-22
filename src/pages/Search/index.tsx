@@ -34,8 +34,14 @@ export const Search: React.FC<Props> = () => {
     };
   });
 
+  const handleInputChange = (input: string) => {
+    if (input !== "") {
+      setQuery(input);
+    }
+  };
+
   return (
-    <>
+    <div className="flex flex-col gap-y-1">
       <header>
         <h1 className="text-6xl mb-4 md:text-7xl">How's the weather?</h1>
       </header>
@@ -54,7 +60,7 @@ export const Search: React.FC<Props> = () => {
         onChange={(option) => {
           setSelectedLocation(option);
         }}
-        onInputChange={(input) => setQuery(input)}
+        onInputChange={(input) => handleInputChange(input)}
       ></Select>
       <Button
         tailwind="w-48 self-center"
@@ -64,10 +70,10 @@ export const Search: React.FC<Props> = () => {
         }
         isDisabled={selectedLocation === null}
       >
-        <span className="text-xl font-bold">
+        <span className="text-lg">
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon> Search
         </span>
       </Button>
-    </>
+    </div>
   );
 };

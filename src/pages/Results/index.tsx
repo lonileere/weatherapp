@@ -37,13 +37,16 @@ export const Results: React.FC<Props> = () => {
   let forecastList = list as Array<ForecastList>;
 
   return (
-    <>
+    <div className="flex flex-col md:space-y-8">
       <div className="flex flex-row gap-x-2 justify-between align-baseline">
         <h1 className="text-xl mb-4 md:text-7xl">
           {buildCountryString(city.name, city.county, city.country)}
         </h1>
         <Link to="/">
-          <FontAwesomeIcon className="text-2xl" icon={faArrowCircleLeft} />
+          <FontAwesomeIcon
+            className="text-2xl md:text-6xl"
+            icon={faArrowCircleLeft}
+          />
         </Link>
       </div>
 
@@ -76,6 +79,6 @@ export const Results: React.FC<Props> = () => {
           {"+3hrs"}
         </Button>
       </div>
-    </>
+    </div>
   );
 };
