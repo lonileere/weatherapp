@@ -63,7 +63,6 @@ export const Search: React.FC<Props> = () => {
           navigate("/results", { state: selectedLocation })
         }
         isDisabled={selectedLocation === null}
-        primary={true}
       >
         <span className="text-xl font-bold">
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon> Search
