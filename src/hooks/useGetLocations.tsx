@@ -4,7 +4,7 @@ export const useGetLocations = (query: string) => {
   const [locations, setLocations] = useState([]);
   useEffect(() => {
     fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=ad19471b1f7c5ec3d4ff847f88e94f14`
     )
       .then((res) => {
         if (res.status === 400) {
