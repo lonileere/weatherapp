@@ -1,7 +1,7 @@
 {
   "name": "weatherapp",
   "version": "0.1.0",
-  "homepage": "https://lonileere.com",
+  "homepage": "https://lonileere.com/weatherapp",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
