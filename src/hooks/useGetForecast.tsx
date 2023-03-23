@@ -13,7 +13,7 @@ export const useGetForecast = (lat: number, lon: number) => {
   const [data, setData] = useState<ForecastProps | undefined>(undefined);
   useEffect(() => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=ad19471b1f7c5ec3d4ff847f88e94f14`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=ad19471b1f7c5ec3d4ff847f88e94f14`
     )
       .then((res) => {
         if (res.status === 400) {
